@@ -1,15 +1,19 @@
 package uv.tc.time_fast.poko
 
 data class Colaborador(
-    val id: Int,
-    val nombre: String,
-    val apellidoPaterno: String,
-    val apellidoMaterno: String,
-    val correo: String,
-    val curp: String,
-    val numeroPersonal: String,
-    val password: String ?,
-    val foto: String ?,
-    val idRol: Int,
-    val rol: String
+    var id: Int,
+    var nombre: String,
+    var apellidoPaterno: String,
+    var apellidoMaterno: String,
+    var correo: String,
+    var curp: String,
+    var numeroPersonal: String,
+    var password: String?,
+    var foto: String?,
+    var idRol: Int?,
+    var idUnidad: Int?,
+    var vin: String?,
+    var nii: String?,
+    var rol: String?,
+    var numLicencia: String?
 )

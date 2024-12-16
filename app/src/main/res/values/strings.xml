@@ -8,6 +8,7 @@
     <string name="user_field">Usuario</string>
     <string name="pass_field">Contraseña</string>
     <string name="pass_forgot"><u>Contraseña Olvidada</u></string>
+    <string name="login_underline"><u>Login</u></string>
     <string name="policy_terms">Al acceder, aceptas los <u>Términos y Condiciones</u> y la <u>Política de Privacidad</u></string>
 
     <!-- Recycle View Item String -->
@@ -47,5 +48,7 @@
     <string name="paquete_x">Paquete x</string>
     <string name="descripcion">Descripción:</string>
     <string name="dimension">Dimensión:</string>
+    <string name="recuperar_contrasenia">Recuperar Contraseña</string>
+    <string name="email_field">Correo</string>
 
 </resources>
