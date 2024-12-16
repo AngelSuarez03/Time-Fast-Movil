@@ -1,0 +1,51 @@
+<resources>
+    <string name="app_name">Time-Fast</string>
+    <string name="eslogan">Organiza, Optimiza, Avanza</string>
+
+    <!-- Login String -->
+    <string name="login">Login</string>
+    <string name="btn_login">Ingresar</string>
+    <string name="user_field">Usuario</string>
+    <string name="pass_field">Contraseña</string>
+    <string name="pass_forgot"><u>Contraseña Olvidada</u></string>
+    <string name="policy_terms">Al acceder, aceptas los <u>Términos y Condiciones</u> y la <u>Política de Privacidad</u></string>
+
+    <!-- Recycle View Item String -->
+    <string name="destino">Destino:</string>
+    <string name="xxxxxxxx">XXXXXXXX</string>
+    <string name="numero_de_guia">Numero de Guia:</string>
+    <string name="estatus">Estatus:</string>
+    <string name="detalles">Detalles</string>
+
+    <!-- Home Fragment String -->
+    <string name="por_el_momento_no_tienes_ningun_envio_asignado">Por el momento no tienes ningun envío asignado :(</string>
+    <string name="envio_x">Envio X</string>
+    <string name="informacion_del_envio">Información del Envío</string>
+
+    <!-- Activity Detail String -->
+    <string name="origen">Origen:</string>
+    <string name="contenido">Contenido</string>
+    <string name="contacto_del_cliente">Contacto del Cliente</string>
+    <string name="nombre">Nombre:</string>
+    <string name="correo">Correo:</string>
+    <string name="telefono">Teléfono:</string>
+    <string name="datos_personales">Datos Personales</string>
+    <string name="apellido_paterno">Apellido Paterno:</string>
+    <string name="curp">CURP:</string>
+    <string name="apellido_materno">Apellido Materno:</string>
+    <string name="numero_de_personal">Numero de Personal:</string>
+    <string name="password">Password:</string>
+    <string name="text_pasword_ex">********</string>
+    <string name="estatus_dialog_title">Estatus</string>
+    <string name="razon_motivo">* Motivo necesario en caso de seleccionar el estatus \'Detenido\' o \'Cancelado\'</string>
+    <string name="en_transito">En Tránsito</string>
+    <string name="entregado">Entregado</string>
+    <string name="cancelado">Cancelado</string>
+    <string name="detenido">Detenido</string>
+    <string name="actualizar">Actualizar</string>
+    <string name="ingrese_el_motivo_del_cambio">Ingrese el motivo del cambio</string>
+    <string name="paquete_x">Paquete x</string>
+    <string name="descripcion">Descripción:</string>
+    <string name="dimension">Dimensión:</string>
+
+</resources>

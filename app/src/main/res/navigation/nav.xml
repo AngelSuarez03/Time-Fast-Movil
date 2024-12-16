@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:startDestination="@id/fg_home"
+    android:id="@+id/nav">
+
+    <fragment
+        android:id="@+id/fg_home"
+        android:name="uv.tc.time_fast.HomeFragment"
+        tools:layout="@layout/fragment_home">
+    </fragment>
+
+    <fragment
+        android:id="@+id/fg_profile"
+        android:name="uv.tc.time_fast.ProfileFragment"
+        tools:layout="@layout/fragment_profile">
+        <argument
+            android:name="colaborador"
+            app:argType="string"/>
+    </fragment>
+
+</navigation>

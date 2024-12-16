@@ -1,0 +1,298 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".DetailActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/iv_logo"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_margin="20dp"
+        android:src="@drawable/logo"
+        android:elevation="10dp" />
+
+    <TextView
+        android:id="@+id/tv_eslogan"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingEnd="90dp"
+        android:text="@string/eslogan"
+        android:layout_marginStart="10dp"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:layout_below="@id/iv_logo"
+        android:drawableEnd="@drawable/delivered_icon"/>
+
+    <TextView
+        android:id="@+id/tv_title_envio"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:paddingStart="10dp"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        android:text="@string/envio_x"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:paddingStart="10dp"
+        android:textSize="20sp"
+        android:text="@string/informacion_del_envio"/>
+
+    <GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:rowCount="3"
+        android:columnCount="3">
+
+        <ImageView
+            android:layout_height="43dp"
+            android:src="@drawable/map_icon"
+            android:layout_column="0"
+            android:layout_columnWeight="1"
+            android:layout_row="0"/>
+
+        <TextView
+            android:text="@string/origen"
+            android:textSize="15sp"
+            android:textColor="#B1B1B1"
+            android:layout_column="1"
+            android:layout_columnWeight="3"
+            android:layout_row="0"/>
+
+        <TextView
+            android:layout_width="150dp"
+            android:id="@+id/tv_origen"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="10dp"
+            android:textSize="17sp"
+            android:text="@string/xxxxxxxx"
+            android:textStyle="bold"
+            android:layout_column="1"
+            android:layout_columnWeight="3"
+            android:layout_row="0"/>
+
+        <ImageView
+            android:layout_height="43dp"
+            android:src="@drawable/destination_icon"
+            android:layout_column="0"
+            android:layout_columnWeight="1"
+            android:layout_row="1"/>
+
+        <TextView
+            android:text="@string/destino"
+            android:textSize="15sp"
+            android:textColor="#B1B1B1"
+            android:layout_column="1"
+            android:layout_columnWeight="3"
+            android:layout_row="1"/>
+
+        <TextView
+            android:layout_width="150dp"
+            android:id="@+id/tv_destino"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="10dp"
+            android:textSize="17sp"
+            android:text="@string/xxxxxxxx"
+            android:textStyle="bold"
+            android:layout_column="1"
+            android:layout_columnWeight="3"
+            android:layout_row="1"/>
+
+        <ImageView
+            android:layout_height="43dp"
+            android:src="@drawable/status_icon"
+            android:layout_column="0"
+            android:layout_columnWeight="1"
+            android:layout_row="2"/>
+
+        <TextView
+            android:text="@string/estatus"
+            android:textSize="15sp"
+            android:textColor="#B1B1B1"
+            android:layout_column="1"
+            android:layout_columnWeight="3"
+            android:layout_row="2"/>
+
+        <TextView
+            android:id="@+id/tv_estatus"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="10dp"
+            android:paddingEnd="10dp"
+            android:textSize="17sp"
+            android:text="@string/xxxxxxxx"
+            android:textStyle="bold"
+            android:layout_column="1"
+            android:layout_columnWeight="3"
+            android:layout_row="2"/>
+
+        <ImageView
+            android:id="@+id/iv_editar_estatus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:paddingEnd="10dp"
+            android:src="@drawable/edit_icon"
+            android:layout_row="2"
+            android:layout_column="2"
+            android:layout_columnWeight="0"/>
+
+    </GridLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/black"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/tv_title_contenido"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:paddingStart="10dp"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                android:text="@string/contenido"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_contenido_envio"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:layout_margin="10dp"
+                android:layout_below="@id/tv_title_contenido"/>
+
+            <TextView
+                android:id="@+id/tv_sin_paquetes"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:textAlignment="center"
+                android:text="No contiene paquetes"
+                android:layout_below="@id/tv_title_contenido"/>
+
+        </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/black"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:paddingStart="10dp"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        android:text="@string/contacto_del_cliente"/>
+
+    <GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:rowCount="3"
+        android:columnCount="2">
+
+        <ImageView
+            android:layout_height="43dp"
+            android:src="@drawable/user_icon"
+            android:layout_column="0"
+            android:layout_columnWeight="1"
+            android:layout_row="0"/>
+
+        <TextView
+            android:text="@string/nombre"
+            android:textSize="15sp"
+            android:textColor="#B1B1B1"
+            android:layout_column="1"
+            android:layout_columnWeight="3"
+            android:layout_row="0"/>
+
+        <TextView
+            android:id="@+id/tv_nombre_cliente"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="10dp"
+            android:textSize="17sp"
+            android:text="@string/xxxxxxxx"
+            android:textStyle="bold"
+            android:layout_column="1"
+            android:layout_columnWeight="3"
+            android:layout_row="0"/>
+
+        <ImageView
+            android:layout_height="43dp"
+            android:src="@drawable/email_icon"
+            android:layout_column="0"
+            android:layout_columnWeight="1"
+            android:layout_row="1"/>
+
+        <TextView
+            android:text="@string/correo"
+            android:textSize="15sp"
+            android:textColor="#B1B1B1"
+            android:layout_column="1"
+            android:layout_columnWeight="3"
+            android:layout_row="1"/>
+
+        <TextView
+            android:id="@+id/tv_correo_cliente"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="10dp"
+            android:textSize="17sp"
+            android:text="@string/xxxxxxxx"
+            android:textStyle="bold"
+            android:layout_column="1"
+            android:layout_columnWeight="3"
+            android:layout_row="1"/>
+
+        <ImageView
+            android:layout_height="43dp"
+            android:src="@drawable/phone_icon"
+            android:layout_column="0"
+            android:layout_columnWeight="1"
+            android:layout_row="2"/>
+
+        <TextView
+            android:text="@string/telefono"
+            android:textSize="15sp"
+            android:textColor="#B1B1B1"
+            android:layout_column="1"
+            android:layout_columnWeight="3"
+            android:layout_row="2"/>
+
+        <TextView
+            android:id="@+id/tv_telefono_cliente"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="10dp"
+            android:paddingEnd="10dp"
+            android:textSize="17sp"
+            android:text="@string/xxxxxxxx"
+            android:textStyle="bold"
+            android:layout_column="1"
+            android:layout_columnWeight="3"
+            android:layout_row="2"/>
+
+    </GridLayout>
+
+    </LinearLayout>
+
+</ScrollView>

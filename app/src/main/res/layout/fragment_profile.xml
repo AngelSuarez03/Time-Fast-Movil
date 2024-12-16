@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ProfileFragment">
+
+    <ImageButton
+        android:id="@+id/ib_edit_profile"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_margin="5dp"
+        android:layout_gravity="end"
+        android:src="@drawable/edit_icon"
+        android:background="@color/white"/>
+
+    <ImageView
+        android:id="@+id/iv_profile"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_marginBottom="20dp"
+        android:layout_gravity="center"
+        android:src="@drawable/user_icon"/>
+
+
+        <TextView
+            android:id="@+id/tv_user_data"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="20dp"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:text="@string/datos_personales"/>
+
+    <GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:columnCount="2"
+        android:rowCount="5">
+
+        <ImageView
+            android:layout_height="43dp"
+            android:src="@drawable/user_icon"
+            android:layout_column="0"
+            android:layout_columnWeight="1"
+            android:layout_row="0"/>
+
+        <TextView
+            android:text="@string/nombre"
+            android:textSize="15sp"
+            android:textColor="#B1B1B1"
+            android:layout_column="1"
+            android:layout_columnWeight="3"
+            android:layout_row="0"/>
+
+        <TextView
+            android:id="@+id/tv_nombre"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="10dp"
+            android:textSize="17sp"
+            android:text="@string/xxxxxxxx"
+            android:textStyle="bold"
+            android:layout_column="1"
+            android:layout_columnWeight="3"
+            android:layout_row="0"/>
+
+        <ImageView
+            android:layout_height="43dp"
+            android:src="@drawable/user_icon"
+            android:layout_column="0"
+            android:layout_columnWeight="1"
+            android:layout_row="1"/>
+
+        <TextView
+            android:text="@string/apellido_paterno"
+            android:textSize="15sp"
+            android:textColor="#B1B1B1"
+            android:layout_column="1"
+            android:layout_columnWeight="3"
+            android:layout_row="1"/>
+
+        <TextView
+            android:id="@+id/tv_apellido_paterno"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="10dp"
+            android:textSize="17sp"
+            android:text="@string/xxxxxxxx"
+            android:textStyle="bold"
+            android:layout_column="1"
+            android:layout_columnWeight="3"
+            android:layout_row="1"/>
+
+        <ImageView
+            android:layout_height="43dp"
+            android:src="@drawable/user_icon"
+            android:layout_column="0"
+            android:layout_columnWeight="1"
+            android:layout_row="2"/>
+
+        <TextView
+            android:text="@string/apellido_materno"
+            android:textSize="15sp"
+            android:textColor="#B1B1B1"
+            android:layout_column="1"
+            android:layout_columnWeight="3"
+            android:layout_row="2"/>
+
+        <TextView
+            android:id="@+id/tv_apellido_materno"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="10dp"
+            android:textSize="17sp"
+            android:text="@string/xxxxxxxx"
+            android:textStyle="bold"
+            android:layout_column="1"
+            android:layout_columnWeight="3"
+            android:layout_row="2"/>
+
+        <ImageView
+            android:layout_height="43dp"
+            android:src="@drawable/card_profile_icon"
+            android:layout_column="0"
+            android:layout_columnWeight="1"
+            android:layout_row="3"/>
+
+        <TextView
+            android:text="@string/curp"
+            android:textSize="15sp"
+            android:textColor="#B1B1B1"
+            android:layout_column="1"
+            android:layout_columnWeight="3"
+            android:layout_row="3"/>
+
+        <TextView
+            android:id="@+id/tv_curp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="10dp"
+            android:textSize="17sp"
+            android:text="@string/xxxxxxxx"
+            android:textStyle="bold"
+            android:layout_column="1"
+            android:layout_columnWeight="3"
+            android:layout_row="3"/>
+
+        <ImageView
+            android:layout_height="43dp"
+            android:src="@drawable/id_icon"
+            android:layout_column="0"
+            android:layout_columnWeight="1"
+            android:layout_row="4"/>
+
+        <TextView
+            android:text="@string/numero_de_personal"
+            android:textSize="15sp"
+            android:textColor="#B1B1B1"
+            android:layout_column="1"
+            android:layout_columnWeight="3"
+            android:layout_row="4"/>
+
+        <TextView
+            android:id="@+id/tv_num_personal"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="10dp"
+            android:textSize="17sp"
+            android:text="@string/xxxxxxxx"
+            android:textStyle="bold"
+            android:layout_column="1"
+            android:layout_columnWeight="3"
+            android:layout_row="4"/>
+
+    </GridLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="5dp"
+        android:background="@color/black"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:paddingStart="20dp"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        android:text="Usuario"/>
+
+    <GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:rowCount="2"
+        android:columnCount="2">
+
+        <ImageView
+            android:layout_height="43dp"
+            android:src="@drawable/email_icon"
+            android:layout_column="0"
+            android:layout_columnWeight="1"
+            android:layout_row="0"/>
+
+        <TextView
+            android:text="@string/correo"
+            android:textSize="15sp"
+            android:textColor="#B1B1B1"
+            android:layout_column="1"
+            android:layout_columnWeight="3"
+            android:layout_row="0"/>
+
+        <TextView
+            android:id="@+id/tv_correo"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="10dp"
+            android:textSize="17sp"
+            android:text="@string/xxxxxxxx"
+            android:textStyle="bold"
+            android:layout_column="1"
+            android:layout_columnWeight="3"
+            android:layout_row="0"/>
+
+        <ImageView
+            android:layout_height="43dp"
+            android:src="@drawable/key_icon"
+            android:layout_column="0"
+            android:layout_columnWeight="1"
+            android:layout_row="1"/>
+
+        <TextView
+            android:text="@string/password"
+            android:textSize="15sp"
+            android:textColor="#B1B1B1"
+            android:layout_column="1"
+            android:layout_columnWeight="3"
+            android:layout_row="1"/>
+
+        <TextView
+            android:id="@+id/tv_password"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="10dp"
+            android:textSize="17sp"
+            android:text="@string/text_pasword_ex"
+            android:textStyle="bold"
+            android:layout_column="1"
+            android:layout_columnWeight="3"
+            android:layout_row="1"/>
+
+    </GridLayout>
+
+
+
+</LinearLayout>
