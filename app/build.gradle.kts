@@ -56,6 +56,8 @@ dependencies {
     implementation ("com.koushikdutta.ion:ion:2.+")
     implementation("androidx.navigation:navigation-ui-ktx:2.8.5")
     implementation("androidx.navigation:navigation-fragment-ktx:2.8.5")
+    implementation("com.sun.mail:android-mail:1.6.2")
+    implementation("com.sun.mail:android-activation:1.6.2")
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

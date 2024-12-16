@@ -22,10 +22,9 @@ class LoginActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-     binding = ActivityLoginBinding.inflate(layoutInflater)
-     setContentView(binding.root)
-
+        binding = ActivityLoginBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+        accionForgotPassword()
     }
 
     override fun onStart() {
@@ -84,6 +83,18 @@ class LoginActivity : AppCompatActivity() {
     private fun irPantallaPrincipal(json: String) {
         val intent = Intent(this@LoginActivity, MainActivity::class.java)
         intent.putExtra("colaborador", json)
+        startActivity(intent)
+        finish()
+    }
+
+    private fun accionForgotPassword(){
+        binding.tvForgotPassword.setOnClickListener {
+            irPantallaPassword()
+        }
+    }
+
+    private fun irPantallaPassword() {
+        val intent = Intent(this@LoginActivity, ForgotPasswordActivity::class.java)
         startActivity(intent)
         finish()
     }
