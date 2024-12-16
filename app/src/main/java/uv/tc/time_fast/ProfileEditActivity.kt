@@ -1,9 +1,17 @@
 package uv.tc.time_fast
 
+import android.app.Activity
+import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.net.Uri
 import android.os.Bundle
+import android.util.Base64
 import android.util.Log
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.result.ActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
@@ -14,11 +22,15 @@ import uv.tc.time_fast.poko.Colaborador
 import uv.tc.time_fast.poko.Mensaje
 import uv.tc.time_fast.poko.Posee
 import uv.tc.time_fast.util.Constantes
+import java.io.ByteArrayOutputStream
+import java.io.InputStream
 
 class ProfileEditActivity : AppCompatActivity() {
 
     lateinit var binding: ActivityProfileEditBinding
     lateinit var colaborador: Colaborador
+    var fotoPerfilBytes : ByteArray ? = null
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,6 +39,16 @@ class ProfileEditActivity : AppCompatActivity() {
         serializarColaborador(intent.getStringExtra("colaborador").toString())
         cargarDatos()
         actualizarDatos()
+    }
+
+    override fun onStart() {
+        super.onStart()
+        obtenerFotoCliente(colaborador.id)
+        binding.ibEditProfile.setOnClickListener {
+            val intent = Intent(Intent.ACTION_PICK)
+            intent.type = "image/*"
+            selectorFotoPerfil.launch(intent)
+        }
     }
 
     private fun serializarColaborador(json: String) {
@@ -129,6 +151,85 @@ class ProfileEditActivity : AppCompatActivity() {
             finish()
         } else {
             Toast.makeText(this@ProfileEditActivity, respuestaActualizar.mensaje, Toast.LENGTH_LONG).show()
+        }
+    }
+
+    //Seleccion foto
+    private val selectorFotoPerfil = this.registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()
+    ) { result : ActivityResult ->
+        if(result.resultCode == Activity.RESULT_OK) {
+            val data = result.data
+            val imgURI = data?.data
+            if(imgURI != null) {
+                //Imagen recibida
+                fotoPerfilBytes = uriToByteArray(imgURI)
+                if(fotoPerfilBytes != null)
+                    subirFotoPerfil(colaborador.id)
+            }
+        }
+    }
+
+    private fun uriToByteArray(uri: Uri): ByteArray? {
+        return try {
+            val inputStream: InputStream? = contentResolver.openInputStream(uri)
+            val bitmap = BitmapFactory.decodeStream(inputStream)
+            val byteArrayOutputStream = ByteArrayOutputStream()
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream)
+            byteArrayOutputStream.toByteArray()
+        } catch (e: Exception) {
+            e.printStackTrace()
+            null
+        }
+    }
+
+    private fun subirFotoPerfil(idColaborador: Int) {
+        Ion.with(this@ProfileEditActivity)
+            .load("PUT", "${Constantes().URL_WS}colaborador/subirFoto/${idColaborador}")
+            .setByteArrayBody(fotoPerfilBytes)
+            .asString()
+            .setCallback { e, result ->
+                if(e == null){
+                    val gson = Gson()
+                    val msj = gson.fromJson(result, Mensaje::class.java)
+                    Toast.makeText(this@ProfileEditActivity, msj.mensaje, Toast.LENGTH_LONG).show()
+                    if( !msj.error ) {
+                        obtenerFotoCliente(idColaborador)
+                    }
+                } else {
+                    Toast.makeText(this@ProfileEditActivity, "Error: " + e.message, Toast.LENGTH_LONG).show()
+                }
+            }
+    }
+
+    fun obtenerFotoCliente(idColaborador: Int) {
+        Ion.with(this@ProfileEditActivity)
+            .load("GET","${Constantes().URL_WS}colaborador/obtenerFoto/${idColaborador}")
+            .asString()
+            .setCallback { e, result ->
+                if(e == null){
+                    cargarFotoColaborador(result)
+                } else {
+                    Toast.makeText(this@ProfileEditActivity, "Error: " + e.message, Toast.LENGTH_LONG).show()
+                }
+            }
+    }
+
+    fun cargarFotoColaborador(json: String) {
+        if(json.isNotEmpty()){
+            val gson = Gson()
+            val colaboradorFoto = gson.fromJson(json, Colaborador::class.java)
+            if(colaboradorFoto.foto != null){
+                try {
+                    val imgByte = Base64.decode(colaboradorFoto.foto, Base64.DEFAULT)
+                    val imgBitMap = BitmapFactory.decodeByteArray(imgByte, 0, imgByte.size)
+                    binding.ivProfile.setImageBitmap(imgBitMap)
+                } catch (e: Exception) {
+                    Toast.makeText(this@ProfileEditActivity, "Error img: " + e.message, Toast.LENGTH_LONG).show()
+                }
+            } else {
+                Toast.makeText(this@ProfileEditActivity, "No cuentas con foto de perfil", Toast.LENGTH_LONG).show()
+            }
         }
     }
 

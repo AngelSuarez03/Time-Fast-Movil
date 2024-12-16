@@ -1,7 +1,9 @@
 package uv.tc.time_fast
 
 import android.content.Intent
+import android.graphics.BitmapFactory
 import android.os.Bundle
+import android.util.Base64
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -37,6 +39,7 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
                 serializarDatosColaborador(json)
                 cargarDatosColaborador()
                 editarDatos()
+                obtenerFotoCliente(colaborador.id)
             } else {
                 Log.e("ProfileFragment", "El JSON es null")
             }
@@ -101,5 +104,37 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
         }else
             Toast.makeText(requireContext(), respuestaLogin.mensaje, Toast.LENGTH_LONG).show()
     }
+
+    fun obtenerFotoCliente(idColaborador: Int) {
+        Ion.with(requireContext())
+            .load("GET","${Constantes().URL_WS}colaborador/obtenerFoto/${idColaborador}")
+            .asString()
+            .setCallback { e, result ->
+                if(e == null){
+                    cargarFotoColaborador(result)
+                } else {
+                    Toast.makeText(requireContext(), "Error: " + e.message, Toast.LENGTH_LONG).show()
+                }
+            }
+    }
+
+    fun cargarFotoColaborador(json: String) {
+        if(json.isNotEmpty()){
+            val gson = Gson()
+            val colaboradorFoto = gson.fromJson(json, Colaborador::class.java)
+            if(colaboradorFoto.foto != null){
+                try {
+                    val imgByte = Base64.decode(colaboradorFoto.foto, Base64.DEFAULT)
+                    val imgBitMap = BitmapFactory.decodeByteArray(imgByte, 0, imgByte.size)
+                    binding.ivProfile.setImageBitmap(imgBitMap)
+                } catch (e: Exception) {
+                    Toast.makeText(requireContext(), "Error img: " + e.message, Toast.LENGTH_LONG).show()
+                }
+            } else {
+                Toast.makeText(requireContext(), "No cuentas con foto de perfil", Toast.LENGTH_LONG).show()
+            }
+        }
+    }
+
 }
 
