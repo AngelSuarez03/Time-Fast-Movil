@@ -24,8 +24,8 @@
         android:layout_margin="20dp"
         android:layout_alignParentEnd="true"
         android:layout_alignParentTop="true"
-        android:background="@drawable/depth_background"
         android:src="@drawable/logout"
+        android:pointerIcon="hand"
         android:padding="10dp" />
 
     <TextView

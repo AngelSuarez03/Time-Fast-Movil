@@ -2,13 +2,18 @@ package uv.tc.time_fast
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.ImageView
+import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.google.gson.Gson
 import com.koushikdutta.ion.Ion
 import uv.tc.time_fast.databinding.ActivityForgotPasswordBinding
+import uv.tc.time_fast.poko.Mensaje
 import uv.tc.time_fast.util.Constantes
 import java.util.Properties
 import javax.mail.*
@@ -20,6 +25,7 @@ class ForgotPasswordActivity : AppCompatActivity() {
 
     lateinit var binding: ActivityForgotPasswordBinding
     lateinit var password: String
+    private var dialog: AlertDialog? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,11 +52,7 @@ class ForgotPasswordActivity : AppCompatActivity() {
     private fun recuperarPassword() {
         binding.btnForgotPassword.setOnClickListener {
             if (validarCampo()) {
-                val email = binding.etEmail.text.toString()
-                obtenerPassword(email) { password ->
-                    enviarCorreoSMTP(email, "Recuperar Contraseña", password)
-                    Toast.makeText(this@ForgotPasswordActivity, "Correo enviado con éxito", Toast.LENGTH_SHORT).show()
-                }
+                verificarCorreoExistente()
             }
         }
     }
@@ -75,6 +77,47 @@ class ForgotPasswordActivity : AppCompatActivity() {
             valido = false
         }
         return valido
+    }
+
+    private fun validarCorreoExistente(mensaje: String) {
+        val gson = Gson()
+        val respuesta = gson.fromJson(mensaje, Mensaje::class.java)
+        val inflater = layoutInflater
+        val dialogView = inflater.inflate(R.layout.dialog_forgot_password, null)
+
+        dialog = AlertDialog.Builder(this@ForgotPasswordActivity)
+            .setView(dialogView)
+            .create()
+
+        val ivIconoEstadoPeticion = dialogView.findViewById<ImageView>(R.id.iv_icono_estado_petición)
+        val tvTextoPeticion = dialogView.findViewById<TextView>(R.id.tv_texto_peticion)
+
+        if(respuesta.mensaje == "Colaborador existente") {
+            ivIconoEstadoPeticion.setImageResource(R.drawable.check_icon)
+            tvTextoPeticion.text = "Correo enviado con éxito."
+            val email = binding.etEmail.text.toString()
+            obtenerPassword(email) { password ->
+                enviarCorreoSMTP(email, "Recuperar Contraseña", password)
+            }
+        } else {
+            ivIconoEstadoPeticion.setImageResource(R.drawable.canceled_icon)
+            tvTextoPeticion.text = "El correo ingresado no esta registrado."
+        }
+        dialog?.show()
+    }
+
+    private fun verificarCorreoExistente() {
+        Ion.getDefault(this@ForgotPasswordActivity).conscryptMiddleware.enable(false)
+        Ion.with(this@ForgotPasswordActivity)
+            .load("GET", "${Constantes().URL_WS}colaborador/correoExistente/${binding.etEmail.text}")
+            .asString()
+            .setCallback { e, result ->
+                if (e == null) {
+                    validarCorreoExistente(result)
+                } else {
+                    Toast.makeText(this@ForgotPasswordActivity, e.message, Toast.LENGTH_LONG).show()
+                }
+            }
     }
 
     private fun enviarCorreoSMTP(destinatario: String, asunto: String, password: String) {
@@ -137,7 +180,7 @@ class ForgotPasswordActivity : AppCompatActivity() {
             overflow: hidden;
         }
         .header {
-            background-color: #4CAF50;
+            background-color: #203F59;
             color: white;
             text-align: center;
             padding: 20px;
@@ -192,5 +235,4 @@ class ForgotPasswordActivity : AppCompatActivity() {
 """.trimIndent()
     return mensajeHTML
     }
-
 }
