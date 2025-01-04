@@ -57,6 +57,7 @@
 
         <ImageView
             android:layout_height="43dp"
+            android:layout_marginTop="12dp"
             android:src="@drawable/user_icon"
             android:layout_column="0"
             android:layout_columnWeight="1"
@@ -84,6 +85,7 @@
 
         <ImageView
             android:layout_height="43dp"
+            android:layout_marginTop="12dp"
             android:src="@drawable/user_icon"
             android:layout_column="0"
             android:layout_columnWeight="1"
@@ -111,6 +113,7 @@
 
         <ImageView
             android:layout_height="43dp"
+            android:layout_marginTop="12dp"
             android:src="@drawable/user_icon"
             android:layout_column="0"
             android:layout_columnWeight="1"
@@ -151,7 +154,7 @@
             android:layout_columnWeight="3"
             android:layout_row="3"/>
 
-        <EditText
+        <TextView
             android:id="@+id/et_curp"
             android:layout_marginTop="20dp"
             android:layout_marginBottom="10dp"
@@ -215,6 +218,7 @@
 
         <ImageView
             android:layout_height="43dp"
+            android:layout_marginTop="12dp"
             android:src="@drawable/email_icon"
             android:layout_column="0"
             android:layout_columnWeight="1"
@@ -242,6 +246,7 @@
 
         <ImageView
             android:layout_height="43dp"
+            android:layout_marginTop="12dp"
             android:src="@drawable/key_icon"
             android:layout_column="0"
             android:layout_columnWeight="1"

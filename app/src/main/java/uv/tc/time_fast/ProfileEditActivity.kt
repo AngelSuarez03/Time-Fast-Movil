@@ -66,39 +66,60 @@ class ProfileEditActivity : AppCompatActivity() {
         binding.etPassword.setText(colaborador.password)
     }
 
-    private fun validarDatos(): Boolean{
+    private fun validarDatos(): Boolean {
         var valido = true
-        val emailPattern = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$"
-        if (binding.etNombre.text.isEmpty()){
+        val regexNombre = "^[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+$".toRegex()
+        val regexContrasena = "^(?=.*[A-Z])(?=.*\\d)[A-Za-z\\d]{8,}$".toRegex()
+        val emailPattern = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$".toRegex()
+
+        if (binding.etNombre.text.isEmpty()) {
             binding.etNombre.error = "Campo Obligatorio"
             valido = false
+        } else if (!regexNombre.matches(binding.etNombre.text.toString().trim())) {
+            binding.etNombre.error = "No debe contener caracteres especiales ni números"
+            valido = false
         }
-        if (binding.etApellidoPaterno.text.isEmpty()){
+
+        if (binding.etApellidoPaterno.text.isEmpty()) {
             binding.etApellidoPaterno.error = "Campo Obligatorio"
             valido = false
-        }
-        if (binding.etApellidoMaterno.text.isEmpty()){
-            binding.etApellidoMaterno.error = "Campo Obligatorio"
+        } else if (!regexNombre.matches(binding.etApellidoPaterno.text.toString().trim())) {
+            binding.etApellidoPaterno.error = "No debe contener caracteres especiales ni números"
             valido = false
         }
-        if (binding.etCurp.text.isEmpty()){
+
+        if (binding.etApellidoMaterno.text.isEmpty()) {
+            binding.etApellidoMaterno.error = "Campo Obligatorio"
+            valido = false
+        } else if (!regexNombre.matches(binding.etApellidoMaterno.text.toString().trim())) {
+            binding.etApellidoMaterno.error = "No debe contener caracteres especiales ni números"
+            valido = false
+        }
+
+        if (binding.etCurp.text.isEmpty()) {
             binding.etCurp.error = "Campo Obligatorio"
             valido = false
         }
-        if (binding.etCorreo.text.isEmpty()){
+
+        if (binding.etCorreo.text.isEmpty()) {
             binding.etCorreo.error = "Campo Obligatorio"
             valido = false
-        }
-        if (binding.etPassword.text.isEmpty()){
-            binding.etPassword.error = "Campo Obligatorio"
-            valido = false
-        }
-        if (!binding.etCorreo.text.matches(emailPattern.toRegex())) {
+        } else if (!binding.etCorreo.text.matches(emailPattern)) {
             binding.etCorreo.error = "Formato Inválido"
             valido = false
         }
+
+        if (binding.etPassword.text.isEmpty()) {
+            binding.etPassword.error = "Campo Obligatorio"
+            valido = false
+        } else if (!regexContrasena.matches(binding.etPassword.text.toString().trim())) {
+            binding.etPassword.error = "Debe tener 8 caracteres, una mayúscula y un número"
+            valido = false
+        }
+
         return valido
     }
+
 
     private fun actualizarDatos() {
             binding.btnActualizar.setOnClickListener {

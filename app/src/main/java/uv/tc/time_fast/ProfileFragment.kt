@@ -50,7 +50,7 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
 
     override fun onResume() {
         super.onResume()
-        verificarCambios()
+        obtenerColaborador()
     }
 
     private fun serializarDatosColaborador(json: String) {
@@ -93,6 +93,27 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
                     Toast.makeText(requireContext(), e.message, Toast.LENGTH_LONG).show()
                 }
             }
+    }
+
+    private fun obtenerColaborador() {
+        Ion.getDefault(requireContext()).conscryptMiddleware.enable(false)
+        Ion.with(requireContext())
+            .load("GET", "${Constantes().URL_WS}colaborador/obtenerColaborador/${colaborador.id}")
+            .asString()
+            .setCallback { e, result ->
+                if (e == null) {
+                    datosModificados(result)
+                } else {
+                    Toast.makeText(requireContext(), e.message, Toast.LENGTH_LONG).show()
+                }
+            }
+    }
+
+    private fun datosModificados(result: String) {
+        val gson = Gson()
+        colaborador = gson.fromJson(result, Colaborador::class.java)
+        verificarCambios()
+        editarDatos()
     }
 
     private fun serializarInformacion(json: String) {
