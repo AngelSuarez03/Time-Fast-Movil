@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -11,19 +11,27 @@
     tools:context=".LoginActivity">
 
     <ImageView
+        android:id="@+id/iv_logo"
         android:layout_width="match_parent"
         android:layout_height="125dp"
         android:src="@drawable/logo"
-        android:layout_marginTop="60dp"/>
+        android:layout_marginTop="60dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
 
         <TextView
+            android:id="@+id/tv_titulo_login"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="40dp"
             android:textSize="32sp"
             android:textStyle="bold"
             android:textAlignment="center"
-            android:text="@string/login"/>
+            android:text="@string/login"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/iv_logo"/>
 
         <EditText
             android:id="@+id/et_user"
@@ -40,7 +48,10 @@
             android:hint="@string/user_field"
             android:background="@drawable/login_field"
             android:pointerIcon="text"
-            android:inputType="text"/>
+            android:inputType="text"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_titulo_login"/>
 
         <EditText
             android:id="@+id/et_password"
@@ -57,7 +68,20 @@
             android:hint="@string/pass_field"
             android:background="@drawable/login_field"
             android:pointerIcon="text"
-            android:inputType="textPassword"/>
+            android:inputType="textPassword"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/et_user"/>
+
+    <ImageView
+        android:id="@+id/iv_toggle_password"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="-30dp"
+        android:src="@drawable/closed_eye_icon"
+        app:layout_constraintTop_toTopOf="@id/et_password"
+        app:layout_constraintEnd_toEndOf="@id/et_password"
+        app:layout_constraintBottom_toBottomOf="@id/et_password"/>
 
         <Button
             android:id="@+id/btn_login"
@@ -68,7 +92,10 @@
             android:textColor="@color/white"
             android:textStyle="bold"
             android:backgroundTint="@color/contrast"
-            android:text="@string/btn_login" />
+            android:text="@string/btn_login"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/et_password"/>
 
     <TextView
         android:id="@+id/tv_forgot_password"
@@ -78,7 +105,10 @@
         android:text="@string/pass_forgot"
         android:textAlignment="center"
         android:pointerIcon="hand"
-        android:textColor="@color/link"/>
+        android:textColor="@color/link"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btn_login"/>
 
     <TextView
         android:layout_width="match_parent"
@@ -87,5 +117,8 @@
         android:layout_marginStart="30dp"
         android:layout_marginEnd="30dp"
         android:textAlignment="center"
-        android:text="@string/policy_terms"/>
-</LinearLayout>
+        android:text="@string/policy_terms"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_forgot_password"/>
+</androidx.constraintlayout.widget.ConstraintLayout>

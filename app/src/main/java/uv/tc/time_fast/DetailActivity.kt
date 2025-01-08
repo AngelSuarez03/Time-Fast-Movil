@@ -1,5 +1,7 @@
 package uv.tc.time_fast
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -25,6 +27,7 @@ import uv.tc.time_fast.poko.Mensaje
 import uv.tc.time_fast.poko.Paquete
 import uv.tc.time_fast.poko.Posee
 import uv.tc.time_fast.util.Constantes
+import java.net.URLEncoder
 import java.text.SimpleDateFormat
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
@@ -48,6 +51,7 @@ class DetailActivity : AppCompatActivity() {
         serializarDatosColaborador(intent.getStringExtra("colaborador"))
         editarEstatus()
         configurarRecyclerEnvios()
+        abrirMapsDestino()
     }
 
     override fun onStart() {
@@ -69,7 +73,7 @@ class DetailActivity : AppCompatActivity() {
     private fun cargarDatosEnvio() {
         binding.tvTitleEnvio.text = "Envio: " + " '" + envio.numeroGuia + "'"
         binding.tvOrigen.text = envio.calleOrigen + " #" + envio.numeroOrigen + ", " + envio.coloniaOrigen + ", " + envio.ciudadOrigen + ", " + envio.estadoOrigen
-        binding.tvDestino.text = envio.calleDestino + " #" + envio.numeroDestino + ", " + envio.coloniaDestino + ", " + envio.ciudadDestino + ", " + envio.estadoDestino
+        binding.tvDestino.text = envio.calleDestino + " #" + envio.numeroDestino + ", " + envio.coloniaDestino + ", " + envio.cpDestino
         binding.tvEstatus.text = envio.estatus
         binding.tvNombreCliente.text = envio.cliente
         binding.tvCorreoCliente.text = envio.correo
@@ -138,6 +142,7 @@ class DetailActivity : AppCompatActivity() {
                         colaborador.nombre + " " + colaborador.apellidoPaterno + " " + colaborador.apellidoMaterno,
                         obtenerFechaHoraActual(), envio.id.toString().toInt(), idEstatus)
                         actualizarEstatusEnvio(posee)
+                        finish()
                     }
                 }else
                     Toast.makeText(this@DetailActivity, "Seleccione un Estatus", Toast.LENGTH_LONG).show()
@@ -241,6 +246,30 @@ class DetailActivity : AppCompatActivity() {
         binding.tvSinPaquetes.visibility = View.VISIBLE
         binding.tvSinPaquetes.visibility = View.VISIBLE
         binding.rvContenidoEnvio.visibility = View.INVISIBLE
+    }
+
+    private fun abrirMapsDestino() {
+        binding.ivDestinoEnvio.setOnClickListener {
+            var direccion = ""
+            try {
+                direccion = binding.tvDestino.text.toString()
+                val encodedDireccion = URLEncoder.encode(direccion, "UTF-8")
+                val gmmIntentUri = Uri.parse("geo:0,0?q=$encodedDireccion")
+                val mapIntent = Intent(Intent.ACTION_VIEW, gmmIntentUri)
+                mapIntent.setPackage("com.google.android.apps.maps")
+                startActivity(mapIntent)
+            } catch (e: Exception) {
+                Toast.makeText(this, "No se pudo abrir Google Maps, abriendo en el navegador", Toast.LENGTH_LONG).show()
+                openGoogleMapsInBrowser(direccion)
+            }
+        }
+    }
+
+    private fun openGoogleMapsInBrowser(direccion: String) {
+        val encodedDireccion = URLEncoder.encode(direccion, "UTF-8")
+        val mapsUrl = "https://www.google.com/maps/search/?api=1&query=$encodedDireccion"
+        val webIntent = Intent(Intent.ACTION_VIEW, Uri.parse(mapsUrl))
+        startActivity(webIntent)
     }
 
 

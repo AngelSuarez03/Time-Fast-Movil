@@ -43,7 +43,7 @@ class ShippingAdapter(val envios : List<Envio>, val listenerRecycleEnvios : List
             holder.imgEstatus.setImageResource(R.drawable.canceled_icon)
         }
         holder.numeroGuia.text = envio.numeroGuia
-        holder.destino.text = envio.calleDestino + " #" + envio.numeroDestino + ", " + envio.coloniaDestino + ", " + envio.ciudadDestino + ", " + envio.estadoDestino
+        holder.destino.text = envio.calleDestino + " #" + envio.numeroDestino + ", " + envio.coloniaDestino
         holder.estatus.text = envio.estatus
         holder.detalle.setOnClickListener{
             listenerRecycleEnvios.clickDetalleEnvio(envio, position)

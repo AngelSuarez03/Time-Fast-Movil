@@ -2,7 +2,10 @@ package uv.tc.time_fast
 
 import android.content.Intent
 import android.os.Bundle
+import android.text.InputType
 import android.util.Log
+import android.widget.EditText
+import android.widget.ImageView
 import android.widget.Toast
 import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
@@ -19,12 +22,14 @@ import uv.tc.time_fast.util.Constantes
 class LoginActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityLoginBinding
+    private var isPasswordVisible = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
         accionForgotPassword()
+        setupPasswordToggle()
     }
 
     override fun onStart() {
@@ -51,9 +56,7 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun verificarCredenciales(numeroPersonal: String, password: String) {
-        //configuracion biblioteca solo la primera vez
         Ion.getDefault(this@LoginActivity).conscryptMiddleware.enable(false)
-        //consumo de ws
         Ion.with(this@LoginActivity)
             .load("POST", "${Constantes().URL_WS}login/validarCredenciales")
             .setHeader("Content-Type", "application/x-www-form-urlencoded")
@@ -64,7 +67,7 @@ class LoginActivity : AppCompatActivity() {
                 if(e == null){
                     serializarInformacion(result)
                 } else {
-                    Toast.makeText(this@LoginActivity, e.message, Toast.LENGTH_LONG).show()
+                    Toast.makeText(this@LoginActivity, "Error al Iniciar Sesion", Toast.LENGTH_LONG).show()
                 }
             }
     }
@@ -97,6 +100,24 @@ class LoginActivity : AppCompatActivity() {
         val intent = Intent(this@LoginActivity, ForgotPasswordActivity::class.java)
         startActivity(intent)
         finish()
+    }
+
+    private fun setupPasswordToggle() {
+        val passwordEditText = findViewById<EditText>(R.id.et_password)
+        val toggleImageView = findViewById<ImageView>(R.id.iv_toggle_password)
+
+        toggleImageView.setOnClickListener {
+            if (isPasswordVisible) {
+                passwordEditText.inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD
+                toggleImageView.setImageResource(R.drawable.closed_eye_icon)
+            } else {
+                passwordEditText.inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD
+                toggleImageView.setImageResource(R.drawable.open_eye_icon)
+            }
+            isPasswordVisible = !isPasswordVisible
+
+            passwordEditText.setSelection(passwordEditText.text.length)
+        }
     }
 
 }

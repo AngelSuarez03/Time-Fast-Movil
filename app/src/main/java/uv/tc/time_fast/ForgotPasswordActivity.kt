@@ -227,7 +227,7 @@ class ForgotPasswordActivity : AppCompatActivity() {
             <p>¡Gracias por confiar en nosotros!</p>
         </div>
         <div class="footer">
-            &copy; 2024 - TIME - FAST. Todos los derechos reservados.
+            &copy; 2025 - TIME - FAST. Todos los derechos reservados.
         </div>
     </div>
 </body>
